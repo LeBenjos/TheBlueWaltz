@@ -1,7 +1,6 @@
 import Experience from "../Experience";
 import Environment from "./Environment";
-import TemplateMesh from "./components/TemplateMesh";
-import TemplateModel from "./components/TemplateModel";
+import MusicalBox from "./components/MusicalBox";
 import type ActorBase from "./components/bases/ActorBase";
 
 export default class World {
@@ -21,8 +20,7 @@ export default class World {
     }
 
     private _generateActors(): void {
-        this._actors.push(new TemplateMesh());
-        this._actors.push(new TemplateModel());
+        this._actors.push(new MusicalBox());
         for (const actor of this._actors) Experience.Scene.add(actor);
     }
 

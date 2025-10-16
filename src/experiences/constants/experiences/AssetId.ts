@@ -1,7 +1,6 @@
 export const AssetId = {
-    TEMPLATE_TEXTURE: "TEMPLATE_TEXTURE",
-    TEMPLATE_HDR: "TEMPLATE_HDR",
-    TEMPLATE_MODEL: "TEMPLATE_MODEL",
+    HDR_SKY: "HDR_SKY",
+    GLTF_MODEL: "GLTF_MODEL",
 } as const;
 
 export type AssetId = typeof AssetId[keyof typeof AssetId];

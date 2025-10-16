@@ -41,9 +41,8 @@ export default class InitCommand {
     }
 
     private static async _initThree(): Promise<void> {
-        ThreeAssetsManager.AddTexture(AssetId.TEMPLATE_TEXTURE, AssetUtils.GetPath("textures/template.jpg"));
-        ThreeAssetsManager.AddHDR(AssetId.TEMPLATE_HDR, AssetUtils.GetPath("hdrs/template.hdr"));
-        ThreeAssetsManager.AddModel(AssetId.TEMPLATE_MODEL, AssetUtils.GetPath("models/template.glb"));
+        ThreeAssetsManager.AddHDR(AssetId.HDR_SKY, AssetUtils.GetPath("hdrs/template.hdr"));
+        ThreeAssetsManager.AddModel(AssetId.GLTF_MODEL, AssetUtils.GetPath("models/musicalBox.glb"));
     }
 
     private static _initAfterLoad = (): void => {
