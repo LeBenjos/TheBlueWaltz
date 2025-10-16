@@ -32,7 +32,7 @@ export default class ModelBase extends ActorBase {
         this._generateAnimations();
     }
 
-    private _generateModel = (): void => {
+    protected _generateModel(): void {
         const model = ThreeAssetsManager.GetModel(this._assetId).scene.clone();
         model.traverse((child: Group | Object3D | Mesh) => {
             if (this._parameters.object3DId && child.name === this._parameters.object3DId) {

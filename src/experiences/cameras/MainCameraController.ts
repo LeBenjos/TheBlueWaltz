@@ -8,7 +8,8 @@ export default class MainCameraController extends CameraControllerBase {
 
     constructor(cameraOption: ICameraOption) {
         super(CameraId.MAIN, cameraOption);
-        this._cameraContainer.position.set(0, 1.5, 5);
+        this._cameraContainer.position.set(0, 3, 3);
+        this._camera.lookAt(0, 1.5, 0);
 
         if (DebugManager.IsActive) {
             const mainCameraFolder = DebugManager.Gui.addFolder("Main Camera");

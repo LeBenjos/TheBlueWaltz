@@ -5,6 +5,7 @@ export const Object3DId = {
     SCENE: "scene",
     HUMAN: "human",
     TOP: "top",
+    HINGE: "hinge",
     BUTTON_TOP_PART: "buttonTopPart",
 } as const;
 
