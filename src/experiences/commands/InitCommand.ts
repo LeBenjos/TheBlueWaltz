@@ -11,23 +11,23 @@ import AssetUtils from "../Utils/AssetUtils";
 
 export default class InitCommand {
 
-    public static async begin(): Promise<void> {
-        this._initProxies();
-        this._initCommon();
-        this._initThree();
-        this._initManagers();
-        this._initUtils();
+    public static async Begin(): Promise<void> {
+        this._InitProxies();
+        this._InitCommon();
+        this._InitThree();
+        this._InitManagers();
+        this._InitUtils();
     }
 
-    private static async _initProxies(): Promise<void> {
+    private static async _InitProxies(): Promise<void> {
         // 
     }
 
-    private static async _initUtils(): Promise<void> {
+    private static async _InitUtils(): Promise<void> {
         Ticker.Init();
     }
 
-    private static async _initManagers(): Promise<void> {
+    private static async _InitManagers(): Promise<void> {
         DebugManager.Init();
         KeyboardManager.Init();
         CursorManager.Init();
@@ -35,23 +35,23 @@ export default class InitCommand {
         ExperienceManager.Init();
         ThreeAssetsManager.Init();
         CameraControllerManager.Init();
-        ThreeAssetsManager.OnFinishLoad.add(InitCommand._initAfterLoad)
+        ThreeAssetsManager.OnFinishLoad.add(InitCommand._InitAfterLoad)
     }
 
-    private static async _initCommon(): Promise<void> {
+    private static async _InitCommon(): Promise<void> {
         // 
     }
 
-    private static async _initThree(): Promise<void> {
+    private static async _InitThree(): Promise<void> {
         ThreeAssetsManager.AddHDR(AssetId.HDR_SKY, AssetUtils.GetPath("hdrs/template.hdr"));
         ThreeAssetsManager.AddModel(AssetId.GLTF_MODEL, AssetUtils.GetPath("models/musicalBox.glb"));
     }
 
-    private static _initAfterLoad = (): void => {
+    private static _InitAfterLoad = (): void => {
         //
     }
 
-    private static async _end(): Promise<void> {
+    private static async _End(): Promise<void> {
         // 
     }
 } 

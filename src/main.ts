@@ -6,7 +6,7 @@ import Ticker from './experiences/tools/Ticker';
 
 //#region Commands
 //
-InitCommand.begin();
+InitCommand.Begin();
 //
 //#endregion
 
