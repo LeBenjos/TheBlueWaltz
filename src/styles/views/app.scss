@@ -1,0 +1,210 @@
+@use '../abstracts/import' as *;
+
+#app {
+    width: 100%;
+    height: 100%;
+    position: relative;
+
+    h1 {
+        position: absolute;
+        top: 35%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 60rem;
+        margin: 0;
+        text-align: center;
+        color: $blue;
+        font-family: 'Kapakana', 'KapakanaStatic', sans-serif;
+        line-height: 0.5;
+        font-weight: 700;
+        font-size: 20rem;
+        text-shadow:
+            0.1rem 0.1rem 0.5rem $whiteAntiFlashs,
+            -0.1rem -0.1rem 0.5rem $whiteAntiFlashs;
+        pointer-events: none;
+        user-select: none;
+
+        .word {
+            display: inline-block;
+
+            span {
+                opacity: 0;
+                display: inline-block;
+                transform: translateY(0) rotate(0deg) scale(1);
+                transition: opacity 0.3s ease, transform 0.3s ease;
+                animation: titleSpawn 2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+            }
+
+            &.w3 {
+                span:nth-child(1) {
+                    letter-spacing: -3rem;
+                }
+            }
+
+            @for $w from 1 through 3 {
+                &.w#{$w} span {
+                    @for $i from 1 through 5 {
+                        &:nth-child(#{$i}) {
+                            $delay: 0.2 * ($i - 1) + 0.5 * ($w - 1);
+                            animation-delay: #{$delay}s;
+                        }
+                    }
+                }
+            }
+
+            @keyframes titleSpawn {
+                0% {
+                    opacity: 0;
+                    transform: translateY(2rem) rotate(5deg) scale(0.9);
+                }
+
+                60% {
+                    opacity: 1;
+                    transform: translateY(-0.5rem) rotate(-2deg) scale(1.05);
+                }
+
+                100% {
+                    opacity: 1;
+                    transform: translateY(0) rotate(0deg) scale(1);
+                }
+            }
+
+        }
+
+        &.hidden {
+            transition: transform 2s ease-out;
+            transform: translate(-50%, -250%);
+
+            .word span {
+                opacity: 1;
+                animation: titleDeSpawn 1.2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+            }
+
+            @for $w from 1 through 3 {
+                .w#{$w} span {
+                    @for $i from 1 through 5 {
+                        &:nth-child(#{$i}) {
+                            $delay: 0.05 * ($i - 1) + 0.15 * ($w - 1);
+                            animation-delay: #{$delay}s;
+                        }
+                    }
+                }
+            }
+
+            @keyframes titleDeSpawn {
+                0% {
+                    opacity: 1;
+                }
+
+                100% {
+                    opacity: 0;
+                }
+            }
+        }
+    }
+
+    .tutorial {
+        position: absolute;
+        display: inline-block;
+        color: $blue;
+        font-family: Georgia, Times, 'Times New Roman', serif;
+        font-weight: 100;
+        font-size: 2rem;
+        text-shadow: 0 0 0.5rem $silverGrey;
+        opacity: 0;
+
+        span {
+            font-family: 'Kapakana', 'KapakanaStatic', sans-serif;
+            font-size: 4rem;
+            font-weight: 700;
+        }
+
+        &.show {
+            transition: transform 1s ease, opacity 0.5s ease;
+            opacity: 1;
+        }
+
+        &.hidden {
+            transition: transform 1s ease, opacity 0.5s ease;
+            opacity: 0;
+        }
+
+        &.crank {
+            bottom: 5%;
+            right: 50%;
+            transform: translateY(50%) translateX(50%);
+
+            &.show {
+                transform: translateX(50%);
+            }
+        }
+
+        &.button {
+            top: 25%;
+            left: 30%;
+            transform: translateY(-50%) translateX(-50%);
+
+            &.show {
+                transform: translateX(-50%);
+            }
+        }
+    }
+}
+
+#start {
+    pointer-events: all;
+    position: absolute;
+    bottom: 5%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: transparent;
+    padding: 1rem 2rem;
+    color: $blue;
+    font-family: Georgia, Times, 'Times New Roman', serif;
+    font-weight: 100;
+    font-size: 2rem;
+    text-shadow: 0.1rem 0.1rem 0.5rem $whiteAntiFlashs, -0.1rem -0.1rem 0.5rem $whiteAntiFlashs;
+    text-transform: uppercase;
+    border: 0.25rem solid $blue;
+    border-radius: 100dvh;
+    cursor: pointer;
+    transition: background-color 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+        color 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+    animation: buttonSpawn 1s ease-in-out forwards;
+
+    @keyframes buttonSpawn {
+        0% {
+            transform: translate(-50%, 150%) scale(0.9);
+            opacity: 0;
+        }
+
+        100% {
+            transform: translate(-50%, -50%) scale(1);
+            opacity: 1;
+        }
+    }
+
+    &:hover {
+        color: $white;
+        background-color: $blue;
+        text-shadow: 0.1rem 0.1rem 0.5rem $blue, -0.1rem -0.1rem 0.5rem $blue;
+    }
+
+    &.hidden {
+        animation: buttonDeSpawn 0.8s ease-in-out forwards;
+
+        @keyframes buttonDeSpawn {
+            0% {
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translate(-50%, 150%) scale(0.9);
+                opacity: 0;
+            }
+        }
+    }
+
+}

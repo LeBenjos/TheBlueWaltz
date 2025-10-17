@@ -1,13 +1,19 @@
+import gsap from "gsap";
 import { Mesh } from "three";
+import { DomEvent } from "../../constants/doms/DomEvent";
 import { AssetId } from "../../constants/experiences/AssetId";
+import { ExperienceState } from "../../constants/experiences/ExperienceState";
 import { Object3DId } from "../../constants/experiences/Object3DId";
+import ExperienceManager from "../../managers/ExperienceManager";
 import BoxMaterial from "../../materials/BoxMaterial";
 import MetalMaterial from "../../materials/MetalMaterial";
 import ModelBase from "./bases/ModelBase";
 
 export default class BodyModel extends ModelBase {
-    private declare _crank: Mesh | null;
-    private declare _scene: Mesh | null;
+    private declare _crank: Mesh;
+    private declare _scene: Mesh;
+    private declare _buttonBottomPart: Mesh;
+    private _timeline: gsap.core.Timeline = gsap.timeline();
 
     constructor() {
         super(AssetId.GLTF_MODEL, {
@@ -16,6 +22,11 @@ export default class BodyModel extends ModelBase {
             castShadow: true,
             receiveShadow: true,
         });
+        window.removeEventListener(DomEvent.MOUSE_WHEEL, this._onMouseWheel);
+
+        ExperienceManager.OnGameCrank.add(this._onGameCrank);
+        ExperienceManager.OnPushButton.add(this._onPushButton);
+        ExperienceManager.OnRestart.add(this._onRestart);
     }
 
     protected override _generateModel(): void {
@@ -35,15 +46,51 @@ export default class BodyModel extends ModelBase {
                     this._scene = child;
                     child.material = metalMaterial;
                 } else if (child.name === Object3DId.BUTTON_BOTTOM_PART) {
+                    this._buttonBottomPart = child;
                     child.material = metalMaterial;
                 }
             }
         });
     }
 
+    private _onGameCrank = (): void => {
+        window.addEventListener(DomEvent.MOUSE_WHEEL, this._onMouseWheel);
+    }
+
+    private _onMouseWheel = (event: WheelEvent): void => {
+        if (!this._crank) return;
+        if (this._crank.rotation.x < Math.PI * 2 * 5) {
+            const delta = Math.sign(event.deltaY);
+            if (!(this._crank.rotation.x + delta * 0.1 < 0)) {
+                this._crank.rotation.x += delta * 0.1;
+            }
+        } else {
+            window.removeEventListener(DomEvent.MOUSE_WHEEL, this._onMouseWheel);
+            ExperienceManager.GoToNextStep();
+        }
+    }
+
+    private _onPushButton = (): void => {
+        if (!this._buttonBottomPart) return;
+        this._timeline.clear().to(this._buttonBottomPart.position, {
+            z: this._buttonBottomPart.position.z - 0.025,
+            duration: 1,
+            ease: "power2.inOut",
+        });
+    }
+
+    private _onRestart = (): void => {
+        window.removeEventListener(DomEvent.MOUSE_WHEEL, this._onMouseWheel);
+        this._crank.rotation.x = 0;
+        this._buttonBottomPart.position.z += 0.025;
+        this._scene.rotation.y = 0;
+    }
+
     public update(dt: number): void {
         super.update(dt);
-        if (this._crank) this._crank.rotation.x -= 2 * dt;
-        if (this._scene) this._scene.rotation.y += 0.25 * dt;
+        if (ExperienceManager.State === ExperienceState.DANCE) {
+            this._crank.rotation.x -= 0.25 * dt;
+            this._scene.rotation.y += 0.25 * dt;
+        }
     }
 }

@@ -2,6 +2,7 @@ import { AssetId } from "../constants/experiences/AssetId";
 import CameraControllerManager from "../managers/CameraControllerManager";
 import CursorManager from "../managers/CursorManager";
 import DebugManager from "../managers/DebugManager";
+import ExperienceManager from "../managers/ExperienceManager";
 import { KeyboardManager } from "../managers/KeyboardManager";
 import { ResizeManager } from "../managers/ResizeManager";
 import ThreeAssetsManager from "../managers/ThreeAssetsManager";
@@ -31,6 +32,7 @@ export default class InitCommand {
         KeyboardManager.Init();
         CursorManager.Init();
         ResizeManager.Init();
+        ExperienceManager.Init();
         ThreeAssetsManager.Init();
         CameraControllerManager.Init();
         ThreeAssetsManager.OnFinishLoad.add(InitCommand._initAfterLoad)

@@ -74,6 +74,7 @@ export default class Experience {
     //
     public static get Scene(): Scene { return this._Scene; }
     public static get DomElementContainer(): HTMLElement { return this._DomElementContainer; }
+    public static get CameraController(): CameraControllerBase { return this._CameraController; }
     //
     //#endregion
 }
