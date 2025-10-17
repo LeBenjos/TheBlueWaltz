@@ -45,7 +45,7 @@ export default class MainCameraController extends CameraControllerBase {
             x: 1.5,
             y: 1,
             z: 1.5,
-            duration: 1.75,
+            duration: 1,
             ease: "power1.out",
             onComplete: this._onTutorialCrankComplete
         });

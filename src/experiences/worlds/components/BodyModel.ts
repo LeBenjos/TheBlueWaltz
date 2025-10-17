@@ -74,8 +74,8 @@ export default class BodyModel extends ModelBase {
         if (!this._buttonBottomPart) return;
         this._timeline.clear().to(this._buttonBottomPart.position, {
             z: this._buttonBottomPart.position.z - 0.025,
-            duration: 1,
-            ease: "power2.inOut",
+            duration: 0.75,
+            ease: "back.inOut",
         });
     }
 

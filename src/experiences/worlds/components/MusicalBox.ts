@@ -50,8 +50,8 @@ export default class MusicalBox extends ActorBase {
     private _onIntroduction = (): void => {
         this._timeline.clear().to(this._boxContainer.rotation, {
             y: Math.PI * 2,
-            duration: 1.75,
-            ease: "back.out(0.75)",
+            duration: 2,
+            ease: "circ.out",
         });
         this._timeline.to(this._boxContainer.position, {
             y: 0,

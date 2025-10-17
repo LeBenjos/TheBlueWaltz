@@ -53,6 +53,8 @@ export default class ExperienceManager {
             ExperienceManager._State = ExperienceState.RESTART;
             ExperienceManager._OnRestart();
         }
+
+        console.log("ExperienceManager - State:", ExperienceManager._State);
     }
 
     private static _OnStart = () => {

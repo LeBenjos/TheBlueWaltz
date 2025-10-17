@@ -49,8 +49,8 @@ export default class TopModel extends ModelBase {
         if (!this._buttonTopPart) return;
         this._timeline.clear().to(this._buttonTopPart.position, {
             z: this._buttonTopPart.position.z - 0.025,
-            duration: 1,
-            ease: "power2.inOut",
+            duration: 0.75,
+            ease: "back.inOut",
             onComplete: this._onPushButtonComplete,
         });
     }
@@ -62,14 +62,9 @@ export default class TopModel extends ModelBase {
     private _onBegin = (): void => {
         this._timeline.clear().to(this._model.rotation, {
             x: -Math.PI * 0.75,
-            duration: 4,
+            duration: 2,
             ease: "back.out",
-            onComplete: this._onBeginComplete,
         });
-    }
-
-    private _onBeginComplete = (): void => {
-        ExperienceManager.GoToNextStep();
     }
 
     private _onEnding = (): void => {
@@ -88,6 +83,5 @@ export default class TopModel extends ModelBase {
 
     public update(dt: number): void {
         super.update(dt);
-        // this._model.rotation.x -= 0.5 * dt;
     }
 }

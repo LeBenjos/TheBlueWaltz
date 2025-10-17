@@ -21,7 +21,7 @@ export default class HumanModel extends ActorBase {
 
         this._generateModel();
 
-        ExperienceManager.OnDance.add(this._onDance);
+        ExperienceManager.OnBegin.add(this._onBegin);
         ExperienceManager.OnEnding.add(this._onEnding);
         ExperienceManager.OnRestart.add(this._onRestart);
     }
@@ -55,7 +55,7 @@ export default class HumanModel extends ActorBase {
         this._material = new HumanMaterial();
     }
 
-    private _onDance = (): void => {
+    private _onBegin = (): void => {
         this._material.buildHumanAnimation();
     }
 

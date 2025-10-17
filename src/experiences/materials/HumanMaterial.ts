@@ -1,8 +1,8 @@
 import gsap from "gsap";
 import { Color, ShaderMaterial } from "three";
-import ExperienceManager from "../managers/ExperienceManager";
 import humanFragment from "../shaders/humanFragment.glsl";
 import humanVertex from "../shaders/humanVertex.glsl";
+import ExperienceManager from "../managers/ExperienceManager";
 
 export default class HumanMaterial extends ShaderMaterial {
     private _timeline: gsap.core.Timeline = gsap.timeline();
@@ -28,11 +28,12 @@ export default class HumanMaterial extends ShaderMaterial {
             value: 1.0,
             duration: 10.0,
             ease: "ease.inOut",
+            onComplete: this._onHumanAnimationComplete,
         });
+    }
 
-        setTimeout(() => {
-            ExperienceManager.GoToNextStep();
-        }, 20000);
+    private _onHumanAnimationComplete = () => {
+        ExperienceManager.GoToNextStep();
     }
 
     public destroyHumanAnimation(): void {
