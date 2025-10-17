@@ -7,6 +7,7 @@
 
     h1 {
         position: absolute;
+        opacity: 1 !important;
         top: 35%;
         left: 50%;
         transform: translate(-50%, -50%);
@@ -23,57 +24,55 @@
             -0.1rem -0.1rem 0.5rem $whiteAntiFlashs;
         pointer-events: none;
         user-select: none;
+        will-change: transform;
 
         .word {
             display: inline-block;
 
+            &.w3 span:first-child {
+                letter-spacing: -3rem;
+            }
+
             span {
                 opacity: 0;
                 display: inline-block;
-                transform: translateY(0) rotate(0deg) scale(1);
-                transition: opacity 0.3s ease, transform 0.3s ease;
                 animation: titleSpawn 2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+                will-change: transform, opacity;
+                // transform: translateY(0) rotate(0deg) scale(1);
+                // transition: opacity 0.3s ease, transform 0.3s ease;
             }
+        }
 
-            &.w3 {
-                span:nth-child(1) {
-                    letter-spacing: -3rem;
-                }
-            }
-
-            @for $w from 1 through 3 {
-                &.w#{$w} span {
-                    @for $i from 1 through 5 {
-                        &:nth-child(#{$i}) {
-                            $delay: 0.2 * ($i - 1) + 0.5 * ($w - 1);
-                            animation-delay: #{$delay}s;
-                        }
+        @for $w from 1 through 3 {
+            .w#{$w} {
+                @for $i from 1 through 5 {
+                    span:nth-child(#{$i}) {
+                        animation-delay: #{0.2 * ($i - 1) + 0.5 * ($w - 1)}s;
                     }
                 }
             }
+        }
 
-            @keyframes titleSpawn {
-                0% {
-                    opacity: 0;
-                    transform: translateY(2rem) rotate(5deg) scale(0.9);
-                }
-
-                60% {
-                    opacity: 1;
-                    transform: translateY(-0.5rem) rotate(-2deg) scale(1.05);
-                }
-
-                100% {
-                    opacity: 1;
-                    transform: translateY(0) rotate(0deg) scale(1);
-                }
+        @keyframes titleSpawn {
+            0% {
+                opacity: 0;
+                transform: translateY(2rem) rotate(5deg) scale(0.9);
             }
 
+            60% {
+                opacity: 1;
+                transform: translateY(-0.5rem) rotate(-2deg) scale(1.05);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0) rotate(0deg) scale(1);
+            }
         }
 
         &.hidden {
-            transition: transform 2s ease-out;
             transform: translate(-50%, -250%);
+            transition: transform 1.5s ease-in-out;
 
             .word span {
                 opacity: 1;
@@ -81,24 +80,23 @@
             }
 
             @for $w from 1 through 3 {
-                .w#{$w} span {
+                .w#{$w} {
                     @for $i from 1 through 5 {
-                        &:nth-child(#{$i}) {
-                            $delay: 0.05 * ($i - 1) + 0.15 * ($w - 1);
-                            animation-delay: #{$delay}s;
+                        span:nth-child(#{$i}) {
+                            animation-delay: #{0.05 * ($i - 1) + 0.15 * ($w - 1)}s;
                         }
                     }
                 }
             }
+        }
 
-            @keyframes titleDeSpawn {
-                0% {
-                    opacity: 1;
-                }
+        @keyframes titleDeSpawn {
+            0% {
+                opacity: 1;
+            }
 
-                100% {
-                    opacity: 0;
-                }
+            100% {
+                opacity: 0;
             }
         }
     }
@@ -121,7 +119,7 @@
 
         &.show {
             transition: transform 1s ease, opacity 0.5s ease;
-            opacity: 1;
+            opacity: 1 !important;
         }
 
         &.hidden {
