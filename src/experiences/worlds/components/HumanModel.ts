@@ -5,7 +5,6 @@ import { Object3DId } from "../../constants/experiences/Object3DId";
 import ExperienceManager from "../../managers/ExperienceManager";
 import ThreeAssetsManager from "../../managers/ThreeAssetsManager";
 import HumanMaterial from "../../materials/HumanMaterial";
-import Ticker from "../../tools/Ticker";
 import ActorBase from "./bases/ActorBase";
 
 export default class HumanModel extends ActorBase {
@@ -34,6 +33,7 @@ export default class HumanModel extends ActorBase {
 
         this._model = new Points(this._geometry, this._material);
         this._model.position.copy(gltfModel?.position as Vector3);
+        this._model.position.z += 0.5;
         this._model.scale.setScalar(1.5);
         this.add(this._model);
     }
@@ -57,6 +57,10 @@ export default class HumanModel extends ActorBase {
 
     private _onBegin = (): void => {
         this._material.buildHumanAnimation();
+
+        setTimeout(() => {
+            ExperienceManager.GoToNextStep();
+        }, 12000);
     }
 
     private _onEnding = (): void => {
@@ -71,9 +75,10 @@ export default class HumanModel extends ActorBase {
         super.update(dt);
         this._material.update(dt);
         if (ExperienceManager.State === ExperienceState.DANCE) {
-            this._model.rotation.y -= dt;
-            this.position.x = Math.sin(Ticker.ElapsedTime * 0.25) * 0.45;
-            this.position.z = Math.cos(Ticker.ElapsedTime * 0.25) * 0.45;
+            this._model.rotation.y -= dt * 0.5;
+            this.rotation.y += dt * 0.25;
+        } else {
+            this.rotation.y += dt * 0.025;
         }
     }
 }

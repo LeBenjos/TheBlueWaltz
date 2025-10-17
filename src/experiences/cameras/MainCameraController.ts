@@ -98,7 +98,7 @@ export default class MainCameraController extends CameraControllerBase {
             y: 1.5,
             z: 3,
             duration: 2,
-            delay: 4,
+            delay: 2,
             ease: "power1.out",
         });
         this._timeline.to(this._cameraContainer.rotation, {

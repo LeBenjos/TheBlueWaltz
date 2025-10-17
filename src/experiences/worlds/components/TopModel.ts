@@ -72,7 +72,7 @@ export default class TopModel extends ModelBase {
             x: 0,
             duration: 1.5,
             ease: "back.in",
-            delay: 2,
+            delay: 1,
         });
     }
 
