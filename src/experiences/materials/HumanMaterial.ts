@@ -26,7 +26,7 @@ export default class HumanMaterial extends ShaderMaterial {
     public buildHumanAnimation(): void {
         this._timeline.clear().to(this.uniforms.uProgress, {
             value: 1.0,
-            duration: 10.0,
+            duration: 8.0,
             ease: "slow",
             onComplete: this._onHumanAnimationComplete,
         });

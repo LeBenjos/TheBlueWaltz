@@ -2,6 +2,7 @@ import { DomEvent } from "../constants/doms/DomEvent";
 import { ExperienceState } from "../constants/experiences/ExperienceState";
 import { Action } from "../tools/Action";
 import ThreeRaycasterBase from "../tools/ThreeRaycasterBase";
+import HowlerManager from "./HowlerManager";
 
 export default class ExperienceManager {
     private static _State: ExperienceState = ExperienceState.INITIAL;
@@ -19,6 +20,8 @@ export default class ExperienceManager {
 
     public static Init(): void {
         document.querySelector("#start")!.addEventListener(DomEvent.CLICK, ExperienceManager._OnStart);
+        HowlerManager.PlayAmbientSound();
+        HowlerManager.PlayInitSound();
     }
 
     public static GoToNextStep(): void {
@@ -58,6 +61,7 @@ export default class ExperienceManager {
     }
 
     private static _OnStart = () => {
+        HowlerManager.PlayClickSound();
         ExperienceManager.GoToNextStep();
     }
 
@@ -65,14 +69,17 @@ export default class ExperienceManager {
         document.querySelector("#title")!.classList.add("hidden");
         document.querySelector("#start")!.classList.add("hidden");
         document.querySelector("#start")!.removeEventListener(DomEvent.CLICK, ExperienceManager._OnStart);
+        HowlerManager.PlayChestSpawnSound();
         ExperienceManager.OnIntroduction.execute();
     }
 
     private static _OnTutorialCrank = (): void => {
+        HowlerManager.PlayCameraMovementSound();
         ExperienceManager.OnTutorialCrank.execute();
     }
 
     private static _OnGameCrank = (): void => {
+        HowlerManager.PlayStatementSound();
         document.querySelector("#tutorialCrank")?.classList.remove("hidden")!;
         document.querySelector("#tutorialCrank")?.classList.add("show")!;
         ExperienceManager.OnGameCrank.execute();
@@ -81,10 +88,12 @@ export default class ExperienceManager {
     private static _OnTutorialButton = (): void => {
         document.querySelector("#tutorialCrank")?.classList.remove("show")!;
         document.querySelector("#tutorialCrank")?.classList.add("hidden")!;
+        HowlerManager.PlayCameraMovementSound();
         ExperienceManager.OnTutorialButton.execute();
     }
 
     private static _OnGameButton = (): void => {
+        HowlerManager.PlayStatementSound();
         document.querySelector("#tutorialButton")?.classList.remove("hidden")!;
         document.querySelector("#tutorialButton")?.classList.add("show")!;
         ThreeRaycasterBase.Init();
@@ -95,18 +104,23 @@ export default class ExperienceManager {
         document.querySelector("#tutorialButton")?.classList.remove("show")!;
         document.querySelector("#tutorialButton")?.classList.add("hidden")!;
         ThreeRaycasterBase.Reset();
+        HowlerManager.PlayMusicalBoxButtonSound();
         ExperienceManager.OnPushButton.execute();
     }
 
     private static _OnBegin = (): void => {
+        HowlerManager.PlayChestOpenSound();
+        HowlerManager.PlayBuildHumanSound();
         ExperienceManager.OnBegin.execute();
     }
 
     private static _OnDance = (): void => {
+        HowlerManager.PlayMusicalBoxSound();
         ExperienceManager.OnDance.execute();
     }
 
     private static _OnEnding = (): void => {
+        HowlerManager.PlayDestroyedHumanSound();
         ExperienceManager.OnEnding.execute();
     }
 
@@ -116,6 +130,7 @@ export default class ExperienceManager {
         document.querySelector("#start")!.addEventListener(DomEvent.CLICK, ExperienceManager._OnStart);
         ExperienceManager._State = ExperienceState.INITIAL;
         ExperienceManager.OnRestart.execute();
+        HowlerManager.PlayInitSound();
     }
 
     //#region Getters

@@ -15,8 +15,10 @@
     "vite-plugin-glsl": "^1.5.4"
   },
   "dependencies": {
+    "@types/howler": "^2.2.12",
     "@types/three": "^0.180.0",
     "gsap": "^3.13.0",
+    "howler": "^2.2.4",
     "lil-gui": "^0.21.0",
     "three": "^0.180.0"
   }

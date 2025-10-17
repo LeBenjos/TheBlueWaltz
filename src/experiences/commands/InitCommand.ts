@@ -3,6 +3,7 @@ import CameraControllerManager from "../managers/CameraControllerManager";
 import CursorManager from "../managers/CursorManager";
 import DebugManager from "../managers/DebugManager";
 import ExperienceManager from "../managers/ExperienceManager";
+import HowlerManager from "../managers/HowlerManager";
 import { KeyboardManager } from "../managers/KeyboardManager";
 import { ResizeManager } from "../managers/ResizeManager";
 import ThreeAssetsManager from "../managers/ThreeAssetsManager";
@@ -34,6 +35,7 @@ export default class InitCommand {
         ResizeManager.Init();
         ThreeAssetsManager.Init();
         CameraControllerManager.Init();
+        HowlerManager.Init();
         ExperienceManager.Init();
         ThreeAssetsManager.OnFinishLoad.add(InitCommand._InitAfterLoad)
     }
@@ -43,7 +45,7 @@ export default class InitCommand {
     }
 
     private static async _InitThree(): Promise<void> {
-        ThreeAssetsManager.AddHDR(AssetId.HDR_SKY, AssetUtils.GetPath("hdrs/template.hdr"));
+        ThreeAssetsManager.AddHDR(AssetId.HDR_SKY, AssetUtils.GetPath("hdrs/sky.hdr"));
         ThreeAssetsManager.AddModel(AssetId.GLTF_MODEL, AssetUtils.GetPath("models/musicalBox.glb"));
     }
 

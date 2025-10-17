@@ -58,9 +58,9 @@ export default class HumanModel extends ActorBase {
     private _onBegin = (): void => {
         this._material.buildHumanAnimation();
 
-        setTimeout(() => {
-            ExperienceManager.GoToNextStep();
-        }, 12000);
+        // setTimeout(() => {
+        //     ExperienceManager.GoToNextStep();
+        // }, 12000);
     }
 
     private _onEnding = (): void => {

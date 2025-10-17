@@ -2,6 +2,7 @@ import gsap from "gsap";
 import { Object3D } from "three";
 import DebugManager from "../../managers/DebugManager";
 import ExperienceManager from "../../managers/ExperienceManager";
+import HowlerManager from "../../managers/HowlerManager";
 import ActorBase from "./bases/ActorBase";
 import BodyModel from "./BodyModel";
 import HumanModel from "./HumanModel";
@@ -78,6 +79,7 @@ export default class MusicalBox extends ActorBase {
             duration: 1.75,
             delay: 2,
             ease: "back.out(0.75)",
+            onStart: this._onEndingStart,
         });
         this._timeline.to(this._boxContainer.position, {
             y: -1.5,
@@ -92,6 +94,10 @@ export default class MusicalBox extends ActorBase {
             ease: "ease.inOut",
             onComplete: this._onEndingComplete,
         }, "<");
+    }
+
+    private _onEndingStart = (): void => {
+        HowlerManager.PlayChestSpawnSound();
     }
 
     private _onEndingComplete = (): void => {

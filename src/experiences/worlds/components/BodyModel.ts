@@ -5,6 +5,7 @@ import { AssetId } from "../../constants/experiences/AssetId";
 import { ExperienceState } from "../../constants/experiences/ExperienceState";
 import { Object3DId } from "../../constants/experiences/Object3DId";
 import ExperienceManager from "../../managers/ExperienceManager";
+import HowlerManager from "../../managers/HowlerManager";
 import BoxMaterial from "../../materials/BoxMaterial";
 import MetalMaterial from "../../materials/MetalMaterial";
 import ModelBase from "./bases/ModelBase";
@@ -13,6 +14,7 @@ export default class BodyModel extends ModelBase {
     private declare _crank: Mesh;
     private declare _scene: Mesh;
     private declare _buttonBottomPart: Mesh;
+    private declare _round: number;
     private _timeline: gsap.core.Timeline = gsap.timeline();
 
     constructor() {
@@ -23,6 +25,7 @@ export default class BodyModel extends ModelBase {
             receiveShadow: true,
         });
         window.removeEventListener(DomEvent.MOUSE_WHEEL, this._onMouseWheel);
+        this._round = 0;
 
         ExperienceManager.OnGameCrank.add(this._onGameCrank);
         ExperienceManager.OnPushButton.add(this._onPushButton);
@@ -64,6 +67,10 @@ export default class BodyModel extends ModelBase {
             if (!(this._crank.rotation.x + delta * 0.1 < 0)) {
                 this._crank.rotation.x += delta * 0.1;
             }
+            if (this._crank.rotation.x >= Math.PI * 2 * (this._round + 1)) {
+                HowlerManager.PlayCrankSound();
+                this._round++;
+            }
         } else {
             window.removeEventListener(DomEvent.MOUSE_WHEEL, this._onMouseWheel);
             ExperienceManager.GoToNextStep();
@@ -84,6 +91,7 @@ export default class BodyModel extends ModelBase {
         this._crank.rotation.x = 0;
         this._buttonBottomPart.position.z += 0.025;
         this._scene.rotation.y = 0;
+        this._round = 0;
     }
 
     public update(dt: number): void {
