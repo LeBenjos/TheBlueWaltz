@@ -1,4 +1,4 @@
-import { Scene } from "three";
+import { Fog, Scene } from "three";
 import type CameraControllerBase from "./cameras/bases/CameraControllerBase";
 import DebugCameraController from "./cameras/DebugCameraController";
 import MainCameraController from "./cameras/MainCameraController";
@@ -25,6 +25,7 @@ export default class Experience {
         Ticker.Add(Experience);
 
         Experience._Scene = new Scene();
+        Experience._Scene.fog = new Fog(0xFAFAFA, 5, 2000);
 
         Experience._CameraController = new MainCameraController({ type: "perspective", fov: 75, aspect: window.innerWidth / window.innerHeight, near: 0.1, far: 2000 });
         CameraControllerManager.Add(Experience._CameraController, true);
