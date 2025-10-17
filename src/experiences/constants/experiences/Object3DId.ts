@@ -4,6 +4,7 @@ export const Object3DId = {
     CRANK: "crank",
     SCENE: "scene",
     HUMAN: "human",
+    BASE: "base",
     TOP: "top",
     HINGE: "hinge",
     BUTTON_TOP_PART: "buttonTopPart",

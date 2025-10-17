@@ -26,7 +26,7 @@ export default class Experience {
 
         Experience._Scene = new Scene();
 
-        Experience._CameraController = new MainCameraController({ type: "perspective", fov: 75, aspect: window.innerWidth / window.innerHeight, near: 0.1, far: 1000 });
+        Experience._CameraController = new MainCameraController({ type: "perspective", fov: 75, aspect: window.innerWidth / window.innerHeight, near: 0.1, far: 2000 });
         CameraControllerManager.Add(Experience._CameraController, true);
         if (DebugManager.IsActive) {
             CameraControllerManager.Add(new DebugCameraController({ type: "perspective", fov: 75, aspect: window.innerWidth / window.innerHeight, near: 0.1, far: 1000 }));
