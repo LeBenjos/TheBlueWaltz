@@ -32,9 +32,9 @@ export default class InitCommand {
         KeyboardManager.Init();
         CursorManager.Init();
         ResizeManager.Init();
-        ExperienceManager.Init();
         ThreeAssetsManager.Init();
         CameraControllerManager.Init();
+        ExperienceManager.Init();
         ThreeAssetsManager.OnFinishLoad.add(InitCommand._InitAfterLoad)
     }
 

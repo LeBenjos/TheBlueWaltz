@@ -22,7 +22,6 @@ export default class ExperienceManager {
     }
 
     public static GoToNextStep(): void {
-        console.log("ExperienceManager - GoToNextStep:", ExperienceManager._State);
         if (ExperienceManager._State === ExperienceState.INITIAL) {
             ExperienceManager._State = ExperienceState.INTRODUCTION;
             ExperienceManager._OnIntroduction();
