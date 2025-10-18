@@ -73,6 +73,8 @@ export default class HumanModel extends ActorBase {
         if (ExperienceManager.State === ExperienceState.DANCE) {
             this._model.rotation.y -= dt * 0.5;
             this.rotation.y += dt * 0.25;
+        } else if (ExperienceManager.State === ExperienceState.BEGIN) {
+            this.rotation.y = 0;
         } else {
             this.rotation.y += dt * 0.025;
         }

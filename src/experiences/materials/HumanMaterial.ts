@@ -39,7 +39,7 @@ export default class HumanMaterial extends ShaderMaterial {
     public destroyHumanAnimation(): void {
         this._timeline.clear().to(this.uniforms.uProgress, {
             value: 0.0,
-            duration: 4.0,
+            duration: 8.0,
             ease: "slow",
         });
     }
