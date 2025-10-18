@@ -2,6 +2,7 @@ import { BufferAttribute, BufferGeometry, Mesh, Points, Vector3 } from "three";
 import { AssetId } from "../../constants/experiences/AssetId";
 import { ExperienceState } from "../../constants/experiences/ExperienceState";
 import { Object3DId } from "../../constants/experiences/Object3DId";
+import DebugManager from "../../managers/DebugManager";
 import ExperienceManager from "../../managers/ExperienceManager";
 import ThreeAssetsManager from "../../managers/ThreeAssetsManager";
 import HumanMaterial from "../../materials/HumanMaterial";
@@ -53,6 +54,12 @@ export default class HumanModel extends ActorBase {
 
     private _generateMaterial(): void {
         this._material = new HumanMaterial();
+
+        if (DebugManager.IsActive) {
+            const humanFolder = DebugManager.Gui.addFolder("Human Particles");
+            humanFolder.add(this._material.uniforms.uMouseRadius, "value", 0.1, 2.0, 0.01).name("Mouse Radius");
+            humanFolder.add(this._material.uniforms.uMouseStrength, "value", 0.0, 2.0, 0.01).name("Mouse Strength");
+        }
     }
 
     private _onBegin = (): void => {

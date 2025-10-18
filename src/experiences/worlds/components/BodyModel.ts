@@ -8,6 +8,7 @@ import ExperienceManager from "../../managers/ExperienceManager";
 import HowlerManager from "../../managers/HowlerManager";
 import BoxMaterial from "../../materials/BoxMaterial";
 import MetalMaterial from "../../materials/MetalMaterial";
+import Ticker from "../../tools/Ticker";
 import ModelBase from "./bases/ModelBase";
 
 export default class BodyModel extends ModelBase {
@@ -63,11 +64,9 @@ export default class BodyModel extends ModelBase {
     private _onMouseWheel = (event: WheelEvent): void => {
         if (!this._crank) return;
         if (this._crank.rotation.x < Math.PI * 2 * 5) {
-            const delta = Math.sign(event.deltaY);
-            if (!(this._crank.rotation.x + delta * 0.1 < 0)) {
-                this._crank.rotation.x += delta * 0.1;
-            }
-            if (this._crank.rotation.x >= Math.PI * 2 * (this._round + 1)) {
+            if (!(this._crank.rotation.x < 0 && event.deltaY < 0)) {
+                this._crank.rotation.x += event.deltaY * 0.1 * Ticker.DeltaTime;
+            } else if (this._crank.rotation.x >= Math.PI * 2 * (this._round + 1)) {
                 HowlerManager.PlayCrankSound();
                 this._round++;
             }

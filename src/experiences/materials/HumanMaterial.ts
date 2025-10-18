@@ -1,5 +1,6 @@
 import gsap from "gsap";
-import { Color, ShaderMaterial } from "three";
+import { Color, ShaderMaterial, Vector2 } from "three";
+import CursorManager from "../managers/CursorManager";
 import ExperienceManager from "../managers/ExperienceManager";
 import humanFragment from "../shaders/humanFragment.glsl";
 import humanVertex from "../shaders/humanVertex.glsl";
@@ -18,7 +19,10 @@ export default class HumanMaterial extends ShaderMaterial {
                 uTime: { value: 0 },
                 uColor: { value: new Color(0x3F79F3) },
                 uSpawnTime: { value: 2.0 },
-                uProgress: { value: 0.0 }
+                uProgress: { value: 0.0 },
+                uMouse: { value: new Vector2(0, 0) },
+                uMouseRadius: { value: 0.1 },
+                uMouseStrength: { value: 0.1 },
             },
         });
     }
@@ -50,5 +54,6 @@ export default class HumanMaterial extends ShaderMaterial {
 
     public update(dt: number): void {
         this.uniforms.uTime.value += dt;
+        this.uniforms.uMouse.value.set(CursorManager.NormalizedX, CursorManager.NormalizedY);
     }
 }
