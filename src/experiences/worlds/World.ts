@@ -23,8 +23,8 @@ export default class World {
 
     private _generateActors(): void {
         this._actors.push(new MusicalBox());
-        this._actors.push(new DecorationModel(new Point(467, -233, -1500), new Point(1, Math.PI * 2, 0), 1000, 1));
-        this._actors.push(new DecorationModel(new Point(-1044.5, -1044.5, -1442.3), new Point(0.26, 0, 5.97), 1000, -1));
+        this._actors.push(new DecorationModel(new Point(3.1, 0.7, -6.3), new Point(1, Math.PI * 2, 0), 6, 1));
+        this._actors.push(new DecorationModel(new Point(-5.1, -3.8, -4), new Point(0.26, 0, 5.97), 5, -1));
         this._actors.push(new DecorationModel(new Point(-1145, 1865, -850), new Point(0, 1.57, 3.27), 500, -1));
         for (const actor of this._actors) Experience.Scene.add(actor);
     }

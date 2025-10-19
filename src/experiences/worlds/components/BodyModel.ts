@@ -66,7 +66,8 @@ export default class BodyModel extends ModelBase {
         if (this._crank.rotation.x < Math.PI * 2 * 5) {
             if (!(this._crank.rotation.x < 0 && event.deltaY < 0)) {
                 this._crank.rotation.x += event.deltaY * 0.1 * Ticker.DeltaTime;
-            } else if (this._crank.rotation.x >= Math.PI * 2 * (this._round + 1)) {
+            }
+            if (this._crank.rotation.x >= Math.PI * 2 * (this._round + 1)) {
                 HowlerManager.PlayCrankSound();
                 this._round++;
             }
