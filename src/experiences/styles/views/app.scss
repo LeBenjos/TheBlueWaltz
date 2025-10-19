@@ -38,8 +38,6 @@
                 display: inline-block;
                 animation: titleSpawn 2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
                 will-change: transform, opacity;
-                // transform: translateY(0) rotate(0deg) scale(1);
-                // transition: opacity 0.3s ease, transform 0.3s ease;
             }
         }
 

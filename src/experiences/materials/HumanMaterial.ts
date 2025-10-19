@@ -21,8 +21,8 @@ export default class HumanMaterial extends ShaderMaterial {
                 uSpawnTime: { value: 2.0 },
                 uProgress: { value: 0.0 },
                 uMouse: { value: new Vector2(0, 0) },
-                uMouseRadius: { value: 0.1 },
-                uMouseStrength: { value: 0.1 },
+                uMouseRadius: { value: 0.25 },
+                uMouseStrength: { value: 0.05 },
             },
         });
     }
