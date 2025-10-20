@@ -23,7 +23,8 @@ export default class Renderer extends WebGLRenderer {
     }
 
     public resize(): void {
-        this.setSize(ResizeManager.Width, ResizeManager.Height);
+        const rect = document.body.getBoundingClientRect();
+        this.setSize(rect.width, rect.height);
         this.setPixelRatio(ResizeManager.PixelRatio);
     }
 
