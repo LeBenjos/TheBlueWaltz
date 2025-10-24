@@ -19,12 +19,12 @@ export default class HowlerManager {
     public static Init(): void {
         Howler.volume(0.5);
         HowlerManager._AmbientSound = new Howl({
-            src: ['./assets/sounds/ambient.wav'],
+            src: ['./assets/sounds/ambient.mp3'],
             loop: true,
             volume: 0.5,
         });
         HowlerManager._MusicalBoxSound = new Howl({
-            src: ['./assets/sounds/musicalBoxGregorQuendel.wav'],
+            src: ['./assets/sounds/musicalBoxGregorQuendel.mp3'],
             loop: false,
             volume: 0.5,
             onend: HowlerManager._onMusicalBoxEnd,
@@ -35,47 +35,47 @@ export default class HowlerManager {
             volume: 0.5,
         });
         HowlerManager._FxClickSound = new Howl({
-            src: ['./assets/sounds/click.wav'],
+            src: ['./assets/sounds/click.mp3'],
             loop: false,
             volume: 0.25,
         });
         HowlerManager._FxChestSpawnSound = new Howl({
-            src: ['./assets/sounds/chestSpawn.wav'],
+            src: ['./assets/sounds/chestSpawn.mp3'],
             loop: false,
             volume: 1,
         });
         HowlerManager._FxChestOpenSound = new Howl({
-            src: ['./assets/sounds/chestOpen.wav'],
+            src: ['./assets/sounds/chestOpen.mp3'],
             loop: false,
             volume: 0.5,
         });
         HowlerManager._FxCrankSound = new Howl({
-            src: ['./assets/sounds/crank.wav'],
+            src: ['./assets/sounds/crank.mp3'],
             loop: false,
             volume: 1,
         });
         HowlerManager._FxStatementSound = new Howl({
-            src: ['./assets/sounds/statement.wav'],
+            src: ['./assets/sounds/statement.mp3'],
             loop: false,
             volume: 0.5,
         });
         HowlerManager._FxMusicalBoxButtonSound = new Howl({
-            src: ['./assets/sounds/musicalBoxButton.wav'],
+            src: ['./assets/sounds/musicalBoxButton.mp3'],
             loop: false,
             volume: 1,
         });
         HowlerManager._FxCameraMovementSound = new Howl({
-            src: ['./assets/sounds/cameraMovement.wav'],
+            src: ['./assets/sounds/cameraMovement.mp3'],
             loop: false,
             volume: 1,
         });
         HowlerManager._FxBuildHumanSound = new Howl({
-            src: ['./assets/sounds/buildHuman.wav'],
+            src: ['./assets/sounds/buildHuman.mp3'],
             loop: false,
             volume: 3,
         });
         HowlerManager._FxDestroyedHumanSound = new Howl({
-            src: ['./assets/sounds/destroyedHuman.wav'],
+            src: ['./assets/sounds/destroyedHuman.mp3'],
             loop: false,
             volume: 1,
         });

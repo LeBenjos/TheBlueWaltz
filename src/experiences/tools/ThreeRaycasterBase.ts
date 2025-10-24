@@ -16,11 +16,13 @@ export default class ThreeRaycasterBase {
     public static Init(): void {
         Ticker.Add(ThreeRaycasterBase);
         window.addEventListener(DomEvent.CLICK, ThreeRaycasterBase._OnClick);
+        window.addEventListener(DomEvent.TOUCH_START, ThreeRaycasterBase._OnClick);
     }
 
     public static Reset(): void {
         Ticker.Remove(ThreeRaycasterBase);
         window.removeEventListener(DomEvent.CLICK, ThreeRaycasterBase._OnClick);
+        window.removeEventListener(DomEvent.TOUCH_START, ThreeRaycasterBase._OnClick);
     }
 
     private static _OnClick = (): void => {

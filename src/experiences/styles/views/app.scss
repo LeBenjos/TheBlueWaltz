@@ -8,33 +8,31 @@
         top: 35%;
         left: 50%;
         transform: translate(-50%, -50%);
-        width: 60rem;
+        width: 100%;
         margin: 0;
         text-align: center;
         color: $blue;
         font-family: 'Kapakana', 'KapakanaStatic', sans-serif;
         line-height: 0.5;
         font-weight: 700;
-        font-size: 20rem;
+        font-size: 40dvh;
         text-shadow:
-            0.1rem 0.1rem 0.5rem $whiteAntiFlashs,
-            -0.1rem -0.1rem 0.5rem $whiteAntiFlashs;
+            0.5dvh 0.5dvh 1dvh $whiteAntiFlashs,
+            -0.5dvh -0.5dvh 1dvh $whiteAntiFlashs;
         pointer-events: none;
         user-select: none;
-        will-change: transform;
 
         .word {
             display: inline-block;
 
             &.w3 span:first-child {
-                letter-spacing: -3rem;
+                letter-spacing: -10dvh;
             }
 
             span {
                 opacity: 0;
                 display: inline-block;
                 animation: titleSpawn 2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
-                will-change: transform, opacity;
             }
         }
 
@@ -51,12 +49,12 @@
         @keyframes titleSpawn {
             0% {
                 opacity: 0;
-                transform: translateY(2rem) rotate(5deg) scale(0.9);
+                transform: translateY(7dvh) rotate(5deg) scale(0.9);
             }
 
             60% {
                 opacity: 1;
-                transform: translateY(-0.5rem) rotate(-2deg) scale(1.05);
+                transform: translateY(-1dvh) rotate(-2deg) scale(1.05);
             }
 
             100% {
@@ -102,13 +100,13 @@
         color: $blue;
         font-family: Georgia, Times, 'Times New Roman', serif;
         font-weight: 100;
-        font-size: 2rem;
-        text-shadow: 0 0 0.5rem $silverGrey;
+        font-size: 4dvh;
+        text-shadow: 0 0 1dvh $silverGrey;
         opacity: 0;
 
         span {
             font-family: 'Kapakana', 'KapakanaStatic', sans-serif;
-            font-size: 4rem;
+            font-size: 8dvh;
             font-weight: 700;
         }
 
@@ -133,12 +131,12 @@
         }
 
         &.button {
-            top: 25%;
-            left: 30%;
-            transform: translateY(-50%) translateX(-50%);
+            top: 15%;
+            left: 50%;
+            transform: translateY(-50%) translateX(-75%);
 
             &.show {
-                transform: translateX(-50%);
+                transform: translateY(0) translateX(-75%);
             }
         }
     }
@@ -152,14 +150,14 @@
     left: 50%;
     transform: translate(-50%, -50%);
     background-color: transparent;
-    padding: 1rem 2rem;
+    padding: 2dvh 4dvh;
     color: $blue;
     font-family: Georgia, Times, 'Times New Roman', serif;
     font-weight: 100;
-    font-size: 2rem;
-    text-shadow: 0.1rem 0.1rem 0.5rem $whiteAntiFlashs, -0.1rem -0.1rem 0.5rem $whiteAntiFlashs;
+    font-size: 5dvh;
+    text-shadow: 0.2dvh 0.2dvh 1dvh $whiteAntiFlashs, -0.2dvh -0.2dvh 1dvh $whiteAntiFlashs;
     text-transform: uppercase;
-    border: 0.25rem solid $blue;
+    border: 0.5dvh solid $blue;
     border-radius: 100dvh;
     cursor: pointer;
     transition: background-color 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94),
@@ -182,7 +180,7 @@
     &:hover {
         color: $white;
         background-color: $blue;
-        text-shadow: 0.1rem 0.1rem 0.5rem $blue, -0.1rem -0.1rem 0.5rem $blue;
+        text-shadow: none;
     }
 
     &.hidden {
@@ -200,5 +198,30 @@
             }
         }
     }
+}
 
+#mobileAlert {
+    opacity: 0;
+    z-index: 10;
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    bottom: 5%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: $blue;
+    font-family: Georgia, Times, 'Times New Roman', serif;
+    font-weight: 100;
+    font-size: 5dvh;
+    text-shadow: 0 0 1dvh $silverGrey;
+}
+
+@media screen and (max-width: 768px) {
+    #mobileAlert {
+        opacity: 1;
+    }
+
+    #start {
+        display: none;
+    }
 }

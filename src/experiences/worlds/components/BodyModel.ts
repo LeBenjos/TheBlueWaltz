@@ -17,6 +17,7 @@ export default class BodyModel extends ModelBase {
     private declare _buttonBottomPart: Mesh;
     private declare _round: number;
     private _timeline: gsap.core.Timeline = gsap.timeline();
+    private _touchStartY: number = 0;
 
     constructor() {
         super(AssetId.GLTF_MODEL, {
@@ -59,6 +60,8 @@ export default class BodyModel extends ModelBase {
 
     private _onGameCrank = (): void => {
         window.addEventListener(DomEvent.MOUSE_WHEEL, this._onMouseWheel);
+        window.addEventListener(DomEvent.TOUCH_START, this._onTouchStart);
+        window.addEventListener(DomEvent.TOUCH_MOVE, this._onTouchMove);
     }
 
     private _onMouseWheel = (event: WheelEvent): void => {
@@ -73,6 +76,32 @@ export default class BodyModel extends ModelBase {
             }
         } else {
             window.removeEventListener(DomEvent.MOUSE_WHEEL, this._onMouseWheel);
+            window.removeEventListener(DomEvent.TOUCH_START, this._onTouchStart);
+            window.removeEventListener(DomEvent.TOUCH_MOVE, this._onTouchMove);
+            ExperienceManager.GoToNextStep();
+        }
+    }
+
+    private _onTouchStart = (event: TouchEvent): void => {
+        this._touchStartY = event.touches[0].clientY;
+    }
+
+    private _onTouchMove = (event: TouchEvent): void => {
+        if (!this._crank) return;
+        const touchY = event.touches[0].clientY;
+        const deltaY = this._touchStartY - touchY;
+        if (this._crank.rotation.x < Math.PI * 2 * 5) {
+            if (!(this._crank.rotation.x < 0 && deltaY < 0)) {
+                this._crank.rotation.x += deltaY * 0.1 * Ticker.DeltaTime;
+            }
+            if (this._crank.rotation.x >= Math.PI * 2 * (this._round + 1)) {
+                HowlerManager.PlayCrankSound();
+                this._round++;
+            }
+        } else {
+            window.removeEventListener(DomEvent.MOUSE_WHEEL, this._onMouseWheel);
+            window.removeEventListener(DomEvent.TOUCH_START, this._onTouchStart);
+            window.removeEventListener(DomEvent.TOUCH_MOVE, this._onTouchMove);
             ExperienceManager.GoToNextStep();
         }
     }

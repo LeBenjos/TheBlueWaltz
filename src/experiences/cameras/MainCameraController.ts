@@ -1,6 +1,8 @@
 import gsap from "gsap";
+import { Vector3 } from "three";
 import { OrbitControls } from "three/examples/jsm/Addons.js";
 import { CameraId } from "../constants/experiences/CameraId";
+import CursorManager from "../managers/CursorManager";
 import DebugManager from "../managers/DebugManager";
 import ExperienceManager from "../managers/ExperienceManager";
 import CameraControllerBase, { type ICameraOption } from "./bases/CameraControllerBase";
@@ -8,11 +10,13 @@ import CameraControllerBase, { type ICameraOption } from "./bases/CameraControll
 export default class MainCameraController extends CameraControllerBase {
     private declare _controls: OrbitControls;
     private _timeline: gsap.core.Timeline = gsap.timeline();
+    private readonly _targetPosition: Vector3;
 
     constructor(cameraOption: ICameraOption) {
         super(CameraId.MAIN, cameraOption);
         this._cameraContainer.rotation.x = Math.PI * 0.25;
         this._cameraContainer.position.set(0, 1.5, 3);
+        this._targetPosition = new Vector3();
 
         if (DebugManager.IsActive) {
             const mainCameraFolder = DebugManager.Gui.addFolder("Main Camera");
@@ -118,5 +122,12 @@ export default class MainCameraController extends CameraControllerBase {
 
     public override update(dt: number): void {
         super.update(dt);
+
+        this._targetPosition.set(
+            CursorManager.NormalizedX * 0.1,
+            CursorManager.NormalizedY * 0.1,
+            0
+        );
+        this._camera.position.lerp(this._targetPosition, 0.1);
     }
 }
